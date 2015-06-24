@@ -45,7 +45,7 @@ public class Service {
 	public String getDefaultValue() throws MalformedURLException, IOException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
-		Facade facade = new DenkmalinkoelnFacade();
+		Facade facade = new DenkmalinkoelnFromResourcesFacade();
 		return facade.getJson();
 	}
 }
