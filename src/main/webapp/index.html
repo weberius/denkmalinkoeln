@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kioske in NRW</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="leaflet-0.7.3/leaflet.viewcenter.css" />
+<link rel="stylesheet" href="leaflet-0.7.3/MarkerCluster.css" />
+<link rel="stylesheet" href="leaflet-0.7.3/MarkerCluster.Default.css" />
+<style type="text/css">
+html,body,#map {
+	height: 100%;
+}
+</style>
+<script src="leaflet-0.7.3/leaflet.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var server = 'http://{s}.tile.openstreetmap.org';
+	var tilesUrl = server + '/{z}/{x}/{y}.png';
+	var zoom = 15;
+	var maxZoom = 18;
+	var center = [ 50.94135, 6.95819 ];
+	var attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
+			+ '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, '
+			+ 'Imagery &copy; <a href="http://mapbox.com">WebBox</a>, '
+			+ '<a href=\'' + tilesUrl + 'slippymap.html\'>Tile Server</a>';
+</script>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+		// create map
+		var map = L.map('map').setView(center, zoom);
+
+		// einbinden des OMS-Layers
+		var osm = L.tileLayer(tilesUrl, {
+			maxZoom : maxZoom,
+			attribution : attribution
+		});
+		map.addLayer(osm);
+	</script>
+</body>
+</html>

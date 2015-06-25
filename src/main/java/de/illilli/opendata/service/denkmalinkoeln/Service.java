@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
-@Path("/service")
+@Path("/")
 public class Service {
 
 	private final static Logger logger = Logger.getLogger(Service.class);
