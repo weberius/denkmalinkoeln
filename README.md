@@ -6,3 +6,4 @@ Denkmal in Köln will die Liste der Denkmäler in Köln, die durch [Offene Daten
 2. Zuordnen von Georeferenzierung anhand von Adressdaten und Nominatim
 3. Darstellung von Punkten auf einer Karte
 
+sldkfj
