@@ -42,12 +42,17 @@ public class DenkmalinkoelnFacade implements Facade {
 				GeoJsonObject geometry = new Point(new LngLatAlt(geoCoding.lon,
 						geoCoding.lat));
 				feature.setGeometry(geometry);
-				feature.setId(Long.toString(geoCoding.osmId));
+				feature.setId(Long.toString(denkmal.denkmalnummer));
 				Map<String, Object> properties = new Hashtable<String, Object>();
 				properties.put("plz", denkmal.plz);
 				properties.put("ort", denkmal.ort);
 				properties.put("strasse", denkmal.strasse);
-				properties.put("nummer", denkmal.nummer);
+				properties.put("baujahr", denkmal.baujahr);
+				properties.put("baujahrZusatz", denkmal.baujahrZusatz);
+				properties.put("kurzbezeichnung", denkmal.kurzbezeichnung);
+				properties.put("untergruppe1", denkmal.untergruppe1);
+				properties.put("untergruppe1", denkmal.untergruppe1);
+				properties.put("bezirk", denkmal.bezirk);
 				feature.setProperties(properties);
 
 				// System.out.println(denkmal.toString());
