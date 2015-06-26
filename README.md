@@ -20,6 +20,11 @@ Die Daten bzgl. der Denkmäler in Köln sind nicht georeferenziert. Allerdings i
 
 Für die Darstellung der Punkte auf einer Karte werden die durch die vorausgehenden Services ermittelten Informationen zu geoJson umgewandelt. Dadurch können die fraglichen Punkte per [Leaflet](http://leafletjs.com/) dargestellt werden.
 
+## Rückgabe
+
+Der Service bietet einerseits eine REST-Schnittstelle an, um die die geoJson formatierten Punkte im JSON Format auszugeben (http://<server:port>/denkmalinkoeln/service). Andererseits gibt es auch eine Weboberfläche, die die Daten anzeigen kann (http://localhost:8090/denkmalinkoeln/);
+
+
 ## Installation 
 
 Es handelt sich bei diesem Projekt um einen Service, der für den Betrieb z.B. einen Tomcat benötigt. Die darzustellenden Daten werden per default aus der Datei [denkmalinkoeln.json](https://github.com/weberius/denkmalinkoeln/blob/master/src/main/resources/denkmalinkoeln.json) gelesen. Das Projekt wird mit maven gebaut.
