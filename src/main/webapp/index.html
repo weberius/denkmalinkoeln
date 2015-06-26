@@ -9,17 +9,18 @@
 <link rel="stylesheet" href="leaflet-0.7.3/leaflet.viewcenter.css" />
 <link rel="stylesheet" href="leaflet-0.7.3/MarkerCluster.css" />
 <link rel="stylesheet" href="leaflet-0.7.3/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="leaflet-0.7.3/L.Control.Locate.min.css" />
 <style type="text/css">
 html, body, #map {
 	height: 100%;
 }
-
 body {
 	margin: 0;
 }
 </style>
 <script src="leaflet-0.7.3/leaflet.js" type="text/javascript"></script>
 <script src="leaflet-0.7.3/leaflet.ajax.js" type="text/javascript"></script>
+<script src="leaflet-0.7.3/L.Control.Locate.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	var server = 'http://{s}.tile.openstreetmap.org';
@@ -46,22 +47,24 @@ body {
 		});
 		map.addLayer(osm);
 
-		function onLocationFound(e) {
-			var radius = e.accuracy / 2;
-			L.marker(e.latlng).addTo(map).bindPopup(
-					"You are within " + radius + " meters from this point")
-					.openPopup();
-			L.circle(e.latlng, radius).addTo(map);
-		}
+		// add location control to global name space for testing only
+		// on a production site, omit the "lc = "!
+		// https://github.com/domoritz/leaflet-locatecontrol
+		lc = L.control.locate({
+		    follow: true,
+		    keepCurrentZoomLevel: false,
+		    markerClass: L.circleMarker,
+		    strings: {
+		        title: "Aktueller Standort",
+		        popup: "You are within {distance} {unit} from this point", 
+		        outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+		    }
+		}).addTo(map);
 
-		function onLocationError(e) {
-			alert(e.message);
-		}
-		map.on('locationfound', onLocationFound);
-		map.on('locationerror', onLocationError);
-		map.locate({
-			setView : true,
-			maxZoom : 16
+		map.on('startfollowing', function() {
+		    map.on('dragstart', lc._stopFollowing, lc);
+		}).on('stopfollowing', function() {
+		    map.off('dragstart', lc._stopFollowing, lc);
 		});
 
 		function onEachFeature(feature, layer) {
