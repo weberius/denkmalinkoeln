@@ -14,6 +14,7 @@
 html, body, #map {
 	height: 100%;
 }
+
 body {
 	margin: 0;
 }
@@ -50,21 +51,23 @@ body {
 		// add location control to global name space for testing only
 		// on a production site, omit the "lc = "!
 		// https://github.com/domoritz/leaflet-locatecontrol
-		lc = L.control.locate({
-		    follow: true,
-		    keepCurrentZoomLevel: false,
-		    markerClass: L.circleMarker,
-		    strings: {
-		        title: "Aktueller Standort",
-		        popup: "You are within {distance} {unit} from this point", 
-		        outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
-		    }
-		}).addTo(map);
+		lc = L.control
+				.locate(
+						{
+							follow : true,
+							keepCurrentZoomLevel : false,
+							markerClass : L.circleMarker,
+							strings : {
+								title : "Aktueller Standort",
+								popup : "You are within {distance} {unit} from this point",
+								outsideMapBoundsMsg : "You seem located outside the boundaries of the map"
+							}
+						}).addTo(map);
 
 		map.on('startfollowing', function() {
-		    map.on('dragstart', lc._stopFollowing, lc);
+			map.on('dragstart', lc._stopFollowing, lc);
 		}).on('stopfollowing', function() {
-		    map.off('dragstart', lc._stopFollowing, lc);
+			map.off('dragstart', lc._stopFollowing, lc);
 		});
 
 		function onEachFeature(feature, layer) {
@@ -83,9 +86,9 @@ body {
 			popupContent += "<h2>" + feature.properties.plz + "";
 			popupContent += "&nbsp;" + feature.properties.ort + "</h2>";
 			if (feature.properties.baujahr) {
-				popupContent += "<h2>Baujahr: " + feature.properties.baujahr
+				popupContent += "<h2>Baujahr: " + feature.properties.baujahrZusatz
 						+ "";
-				popupContent += "&nbsp;" + feature.properties.baujahrZusatz
+				popupContent += "&nbsp;" + feature.properties.baujahr
 						+ "</h2>";
 			}
 			layer.bindPopup(popupContent);
