@@ -14,7 +14,7 @@ Für die Umwandlung von CSV-Daten in JSON-Strukturen wird der Service [dankmalli
 
 ## Zuordnen von Georeferenzierung anhand von Adressdaten und Nominatim
 
-Die Daten bzgl. der Denkmäler in Köln sind nicht georeferenziert. Allerdings ist die Adresse angegeben. Mithilfe von Nominatim ist es möglich die Adress-Daten zu georeferenzieren. Der Zugriff auf den Nominatim-Service wird über den Service [denkmalgeocoding]{https://github.com/weberius/denkmalgeocoding} durchgeführt.
+Die Daten bzgl. der Denkmäler in Köln sind nicht georeferenziert. Allerdings ist die Adresse angegeben. Mithilfe von Nominatim ist es möglich die Adress-Daten zu georeferenzieren. Der Zugriff auf den Nominatim-Service wird über den Service [denkmalgeocoding](https://github.com/weberius/denkmalgeocoding) durchgeführt.
 
 ## Darstellung von Punkten auf einer Karte
 
