@@ -22,7 +22,7 @@ Für die Darstellung der Punkte auf einer Karte werden die durch die vorausgehen
 
 ## Rückgabe
 
-Der Service bietet einerseits eine REST-Schnittstelle an, um die die geoJson formatierten Punkte im JSON Format auszugeben (http://<server:port>/denkmalinkoeln/service). Andererseits gibt es auch eine Weboberfläche, die die Daten anzeigen kann (http://localhost:8090/denkmalinkoeln/);
+Der Service bietet einerseits eine REST-Schnittstelle an, um die die geoJson formatierten Punkte im JSON Format auszugeben (http://<server:port>/denkmalinkoeln/service). Andererseits gibt es auch eine Weboberfläche, die die Daten anzeigen kann (http://<server:port>/denkmalinkoeln/);
 
 
 ## Installation 
