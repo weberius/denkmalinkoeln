@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class DenkmalinkoelnFacadeIntegrationTest {
 
 	@Before
