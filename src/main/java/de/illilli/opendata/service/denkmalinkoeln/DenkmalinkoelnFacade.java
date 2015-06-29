@@ -33,7 +33,7 @@ public class DenkmalinkoelnFacade implements Facade {
 
 		for (Denkmal denkmal : denkmalArray) {
 			askforDenkmalGeocoding = new AskForDenkmalGeocoding(denkmal.plz,
-					denkmal.ort, denkmal.strasse, denkmal.nummer);
+					"Köln", denkmal.strasse, denkmal.nummer);
 			GeoCodingResult geoCoding = askforDenkmalGeocoding
 					.geoCodingResult();
 
@@ -63,6 +63,7 @@ public class DenkmalinkoelnFacade implements Facade {
 
 	}
 
+	@Override
 	public String getJson() {
 
 		try {
