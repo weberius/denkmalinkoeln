@@ -22,6 +22,9 @@ body {
 <script src="leaflet-0.7.3/leaflet.js" type="text/javascript"></script>
 <script src="leaflet-0.7.3/leaflet.ajax.js" type="text/javascript"></script>
 <script src="leaflet-0.7.3/L.Control.Locate.js" type="text/javascript"></script>
+<script src="leaflet-0.7.3/leaflet.markercluster.js"
+	type="text/javascript"></script>
+<script src="jquery/jquery-2.1.1.min.js"></script>
 
 <script type="text/javascript">
 	var server = 'http://{s}.tile.openstreetmap.org';
@@ -86,10 +89,9 @@ body {
 			popupContent += "<h2>" + feature.properties.plz + "";
 			popupContent += "&nbsp;" + feature.properties.ort + "</h2>";
 			if (feature.properties.baujahr) {
-				popupContent += "<h2>Baujahr: " + feature.properties.baujahrZusatz
-						+ "";
-				popupContent += "&nbsp;" + feature.properties.baujahr
-						+ "</h2>";
+				popupContent += "<h2>Baujahr: "
+						+ feature.properties.baujahrZusatz + "";
+				popupContent += "&nbsp;" + feature.properties.baujahr + "</h2>";
 			}
 			layer.bindPopup(popupContent);
 		}
@@ -97,21 +99,30 @@ body {
 		var geoJsonLayer = new L.GeoJSON.AJAX("/denkmalinkoeln/service", {
 			onEachFeature : onEachFeature
 		});
-		map.addLayer(geoJsonLayer);
-		// Array der verwendeten baseLayers (should be read from server by ajax)
-		var baseLayers = {
-			"OpenStreetMap" : osm
-		};
-		// Array der verwendeten overLays (should be read from server by ajax)
-		var overlays = {
-			"Denkmal in Köln" : geoJsonLayer
-		};
-		// Layers dem Control-Layer uebergeben.
-		var layers = new L.Control.Layers(baseLayers, overlays, {
-			collapsed : true,
-			position : 'topright'
+		//map.addLayer(geoJsonLayer);
+
+		var markercluster;
+		$.ajax({
+			url : '/denkmalinkoeln/service',
+			success : function(doc) {
+				if (markercluster != null) {
+					map.removeLayer(markercluster);
+				}
+				markercluster = new L.MarkerClusterGroup();
+				
+				$(doc.features).each(function(index) {
+					var latlng = new L.LatLng(
+							doc.features[index].geometry.coordinates[1],
+							doc.features[index].geometry.coordinates[0]
+							);
+					var marker = new L.marker(latlng);
+					markercluster.addLayer(marker);
+				});
+				// der cluster muss innerhalb von success hinzugefügt werden;
+				// ansonsten sind die Daten noch nicht geladen, wenn der Layer hinzugefügt wird.
+				map.addLayer(markercluster);
+			}
 		});
-		map.addControl(layers);
 	</script>
 </body>
 </html>
