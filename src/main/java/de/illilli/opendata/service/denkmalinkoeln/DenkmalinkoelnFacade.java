@@ -47,6 +47,7 @@ public class DenkmalinkoelnFacade implements Facade {
 				properties.put("plz", denkmal.plz);
 				properties.put("ort", denkmal.ort);
 				properties.put("strasse", denkmal.strasse);
+				properties.put("nummer", denkmal.nummer);
 				properties.put("baujahr", denkmal.baujahr);
 				properties.put("baujahrZusatz", denkmal.baujahrZusatz);
 				properties.put("kurzbezeichnung", denkmal.kurzbezeichnung);
