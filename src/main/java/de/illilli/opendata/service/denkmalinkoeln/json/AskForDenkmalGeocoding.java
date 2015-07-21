@@ -17,7 +17,7 @@ public class AskForDenkmalGeocoding {
 	private static final Logger logger = Logger
 			.getLogger(AskForDenkmalGeocoding.class);
 
-	String url = "http://localhost:8080/denkmalgeocoding/service/de/";
+	String url = "http://localhost:8080/denkmalgeocoding/service/";
 
 	/**
 	 * initialize Object to insure there is a valid object.
