@@ -27,12 +27,24 @@ public class Service {
 	private StringBuilder json = new StringBuilder("{}");
 
 	/**
+	 * This method returns the merged data from denkmallistekoeln and
+	 * denkmalgeocoding in geojson format. Therefor it needs a running
+	 * nominatim-service. It is possible to return just the result from file
+	 * 'denkmalinkoelnAll.json' by using the parameter 'res'. This file has to
+	 * be found in the classpath of the application.
 	 * <p>
-	 * Beispiel:
+	 * example without 'res':
 	 * </p>
 	 * <p>
 	 * <a href="http://localhost:8080/denkmalinkoeln/service">http://localhost:
 	 * 8080/denkmalinkoeln/service</a>
+	 * </p>
+	 * <p>
+	 * example with 'res':
+	 * </p>
+	 * <p>
+	 * <a href="http://localhost:8080/denkmalinkoeln/service?res">http://
+	 * localhost: 8080/denkmalinkoeln/service?res</a>
 	 * </p>
 	 * 
 	 * @return
