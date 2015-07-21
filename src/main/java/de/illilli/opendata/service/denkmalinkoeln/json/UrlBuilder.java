@@ -8,7 +8,7 @@ import java.net.URLEncoder;
 public class UrlBuilder {
 
 	// String nominatimUrl = "http://nominatim.openstreetmap.org/search";
-	String geocodingUrl = "http://localhost:8080/denkmalgeocoding/service/de/";
+	String geocodingUrl = "http://localhost:8080/denkmalgeocoding/service/";
 
 	String spaceCharakter = "%20";
 	String charSet = "UTF-8";
