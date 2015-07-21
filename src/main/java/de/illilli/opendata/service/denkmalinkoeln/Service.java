@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,6 +20,9 @@ public class Service {
 
 	@Context
 	private HttpServletRequest request;
+
+	@Context
+	private HttpServletResponse response;
 
 	/**
 	 * This method returns the merged data from denkmallistekoeln and
