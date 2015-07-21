@@ -117,7 +117,7 @@ body {
 		var markercluster;
 		// use jQuery to load data 
 		$.ajax({
-			url : '/denkmalinkoeln/service',
+			url : '/denkmalinkoeln/service?res',
 			success : function(doc) {
 				if (markercluster != null) {
 					map.removeLayer(markercluster);
