@@ -23,6 +23,7 @@ public class AskForDenkmalGeocoding {
 	 * initialize Object to insure there is a valid object.
 	 */
 	private GeoCodingResult geoCodingResult = new GeoCodingResult();
+	private String error = "";
 
 	public AskForDenkmalGeocoding(int postcode, String city, String street,
 			String housenumber) {
@@ -39,8 +40,8 @@ public class AskForDenkmalGeocoding {
 		} catch (UnsupportedEncodingException e) {
 			logger.error(e);
 		} catch (IOException e) {
-			// TODO: schreibe alle nicht akzeptablen Anfragen weg.
-			System.out.println(e.toString());
+			// schreibe alle problematischen Anfragen auf.
+			error = e.toString();
 			logger.error(e);
 		}
 	}
@@ -53,6 +54,10 @@ public class AskForDenkmalGeocoding {
 
 	public GeoCodingResult geoCodingResult() {
 		return geoCodingResult;
+	}
+
+	public String getError() {
+		return error;
 	}
 
 }

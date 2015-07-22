@@ -52,7 +52,7 @@ public class Service {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/")
-	public String getDefaultValue() throws MalformedURLException, IOException {
+	public String getMergedData() throws MalformedURLException, IOException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		boolean fromResource = request.getParameter("res") != null ? true
 				: false;

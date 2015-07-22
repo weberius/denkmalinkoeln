@@ -1,5 +1,8 @@
 package de.illilli.opendata.service.denkmalinkoeln;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Hashtable;
@@ -25,6 +28,7 @@ public class DenkmalinkoelnFacade implements Facade {
 
 	private String json = "{}";
 	FeatureCollection featureCollection = new FeatureCollection();
+	private StringBuffer errors = new StringBuffer();
 
 	public DenkmalinkoelnFacade() throws MalformedURLException, IOException {
 		AskForDenkmallisteKoeln askforDenkmalListeKoeln = new AskForDenkmallisteKoeln();
@@ -36,6 +40,7 @@ public class DenkmalinkoelnFacade implements Facade {
 					"Köln", denkmal.strasse, denkmal.nummer);
 			GeoCodingResult geoCoding = askforDenkmalGeocoding
 					.geoCodingResult();
+			errors.append(askforDenkmalGeocoding.getError() + "\n");
 
 			if (geoCoding.osmId > 0) {
 				Feature feature = new Feature();
@@ -59,9 +64,30 @@ public class DenkmalinkoelnFacade implements Facade {
 				// System.out.println(denkmal.toString());
 				featureCollection.add(feature);
 			}
-
 		}
+		writeErrors(errors.toString());
+	}
 
+	/**
+	 * this code is caught from <a href=
+	 * "http://www.mkyong.com/java/how-to-write-to-file-in-java-bufferedwriter-example/"
+	 * >How to write to file in Java – BufferedWriter [mkyong.com]</a>
+	 * 
+	 * @throws IOException
+	 */
+	static void writeErrors(String errors) throws IOException {
+		File file = new File("errors.txt");
+
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		bufferedWriter.write(errors);
+		bufferedWriter.close();
+		String msg = "file " + file.getAbsoluteFile() + " written!";
+		logger.info(msg);
 	}
 
 	@Override
