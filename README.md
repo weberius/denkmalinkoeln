@@ -6,7 +6,8 @@ Denkmal in Köln will die Liste der Denkmäler in Köln, die durch [Offene Daten
 
 1. Umwandlen von CSV-Daten in JSON-Strukturen
 2. Zuordnen von Georeferenzierung anhand von Adressdaten und Nominatim
-3. Darstellung von Punkten auf einer Karte
+3. Darstellung von Punkten auf einer Karte mit Clustering Funktion
+4. Standort in der Webapplikation bestimmen.
 
 ## Umwandeln von CSV-Daten in JSON-Strukturen
 
@@ -24,6 +25,17 @@ Für die Darstellung der Punkte auf einer Karte werden die durch die vorausgehen
 
 Der Service bietet einerseits eine REST-Schnittstelle an, um die die geoJson formatierten Punkte im JSON Format auszugeben (http://<server:port>/denkmalinkoeln/service). Andererseits gibt es auch eine Weboberfläche, die die Daten anzeigen kann (http://<server:port>/denkmalinkoeln/);
 
+### REST-Schnittstelle
+
+Die REST-Schnittstelle 
+
+### Weboberfläche
+
+Die Weboberfläche ist mit Leaflet umgesetzt. Sie wird direkt über http://<server:port>/denkmalinkoeln/index.html angezeigt. Zur Darstellung wird das Leaflet Plugn [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) eingesetzt. Damit die Karte per Klick auf den Standort des Benutzers eingestellt werden kann, wird das das Leaflet Plugin [Leaflet.Locate](https://github.com/domoritz/leaflet-locatecontrol) verwendet
+
+#### Leaflet.markercluster
+
+#### leaflet-locatecontrol
 
 ## Installation 
 
