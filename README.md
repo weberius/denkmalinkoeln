@@ -2,7 +2,7 @@
 
 ## Ziel
 
-Das Projekt "Denkmal in Köln" will die Liste der Denkmäler in Köln, die durch [Offene Daten Köln](http://www.offenedaten-koeln.de/) zur Verfügung gestellt werden, auf einer Karte positionieren und dem Benutzer die Möglichkeit geben, sofern er den Standortort für diese Webanwendung in seinem Browser freigibt, die nächsten als Denkmal eingeordneten Stellen anzuzeigen. Im Rahmen dieses Projektes gilt es folgenden Herausforderungen gerecht zu werden:
+Das Projekt "Denkmal in Köln" will die Liste der Denkmäler in Köln, die durch [Offene Daten Köln](http://www.offenedaten-koeln.de/) zur Verfügung gestellt werden, auf einer Karte positionieren und dem Benutzer die Möglichkeit geben, sofern er den Standort für diese Webanwendung in seinem Browser freigibt, die nächsten als Denkmal eingeordneten Stellen anzuzeigen. Im Rahmen dieses Projektes gilt es folgenden Herausforderungen gerecht zu werden:
 
 1. Umwandlen von CSV-Daten in JSON-Strukturen
 2. Zuordnen von Georeferenzierung anhand von Adressdaten und Nominatim
@@ -31,11 +31,13 @@ Die REST-Schnittstelle
 
 ### Weboberfläche
 
-Die Weboberfläche ist mit Leaflet umgesetzt. Sie wird direkt über http://<server:port>/denkmalinkoeln/index.html angezeigt. Zur Darstellung wird das Leaflet Plugn [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) eingesetzt. Damit die Karte per Klick auf den Standort des Benutzers eingestellt werden kann, wird das das Leaflet Plugin [Leaflet.Locate](https://github.com/domoritz/leaflet-locatecontrol) verwendet
+Die Weboberfläche ist mit Leaflet umgesetzt. Sie wird direkt über http://<server:port>/denkmalinkoeln/index.html angezeigt. Zur Darstellung wird das Leaflet Plugn [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) eingesetzt. Damit die Karte per Klick auf den Standort des Benutzers eingestellt werden kann, wird das das Leaflet Plugin [Leaflet.Locate](https://github.com/domoritz/leaflet-locatecontrol) verwendet. Um zu verdeutlichen, dass die Daten noch geladen werden, wird das Leaflet Plugin [Leaflet.Spin](https://github.com/makinacorpus/Leaflet.Spin) verwendet.
 
 #### Leaflet.markercluster
 
-#### leaflet-locatecontrol
+#### Leaflet.Locate
+
+#### Leaflet.Spin
 
 ## Installation 
 
