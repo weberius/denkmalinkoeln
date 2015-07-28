@@ -137,7 +137,9 @@ body {
 				if (markercluster != null) {
 					map.removeLayer(markercluster);
 				}
-				markercluster = new L.MarkerClusterGroup();
+				markercluster = new L.MarkerClusterGroup(
+						{ disableClusteringAtZoom: 18 }
+						);
 
 				$(doc.features).each(
 					function(index) {
