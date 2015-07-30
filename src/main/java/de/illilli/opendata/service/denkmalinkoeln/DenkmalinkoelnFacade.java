@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -17,6 +19,7 @@ import org.geojson.Point;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import de.illilli.opendata.service.denkmalinkoeln.json.AskForDenkmalGeocoding;
 import de.illilli.opendata.service.denkmalinkoeln.json.AskForDenkmallisteKoeln;
@@ -28,7 +31,7 @@ public class DenkmalinkoelnFacade implements Facade {
 
 	private String json = "{}";
 	FeatureCollection featureCollection = new FeatureCollection();
-	private StringBuffer errors = new StringBuffer();
+	private List<Denkmal> geoNotFoundList = new ArrayList<Denkmal>();
 
 	public DenkmalinkoelnFacade() throws MalformedURLException, IOException {
 		AskForDenkmallisteKoeln askforDenkmalListeKoeln = new AskForDenkmallisteKoeln();
@@ -40,7 +43,9 @@ public class DenkmalinkoelnFacade implements Facade {
 					"Köln", denkmal.strasse, denkmal.nummer);
 			GeoCodingResult geoCoding = askforDenkmalGeocoding
 					.geoCodingResult();
-			errors.append(askforDenkmalGeocoding.getError() + "\n");
+			if (askforDenkmalGeocoding.hasError()) {
+				geoNotFoundList.add(denkmal);
+			}
 
 			if (geoCoding.osmId > 0) {
 				Feature feature = new Feature();
@@ -65,7 +70,11 @@ public class DenkmalinkoelnFacade implements Facade {
 				featureCollection.add(feature);
 			}
 		}
-		writeErrors(errors.toString());
+
+		for (Denkmal denkmal : geoNotFoundList) {
+			logger.error("#=> " + new Gson().toJson(denkmal));
+			new DenkmalNotLocated(denkmal);
+		}
 	}
 
 	/**
@@ -76,11 +85,14 @@ public class DenkmalinkoelnFacade implements Facade {
 	 * @throws IOException
 	 */
 	static void writeErrors(String errors) throws IOException {
-		File file = new File("errors.txt");
+		File file = new File("~/errors.txt");
 
 		// if file doesnt exists, then create it
+
 		if (!file.exists()) {
 			file.createNewFile();
+		} else {
+			file.delete();
 		}
 		FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
