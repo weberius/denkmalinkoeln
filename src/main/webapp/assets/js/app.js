@@ -213,10 +213,7 @@ $.getJSON("data/sights.json", function (data) {
   //map.addLayer(theaterLayer);
 });
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
-var museumLayer = L.geoJson(null);
-var museums = L.geoJson(null, {
-  pointToLayer: function (feature, latlng) {
+function pointToLayerDenkmal(feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/denkmal.png",
@@ -227,8 +224,9 @@ var museums = L.geoJson(null, {
       title: feature.properties.kurzbezeichnung,
       riseOnHover: true
     });
-  },
-  onEachFeature: function (feature, layer) {
+}
+
+function onEachFeatureDenkmal(feature, layer) {
     if (feature.properties) {
       var content = "<table class='table table-striped table-bordered table-condensed'>" 
     	  + "<tr><th>Kurzbezeichnung</th><td>" + feature.properties.kurzbezeichnung + "</td></tr>" 
@@ -259,9 +257,18 @@ var museums = L.geoJson(null, {
         lng: layer.feature.geometry.coordinates[0]
       });
     }
-  }
-});
+}
 
+/* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
+var museumLayer = L.geoJson(null);
+var museums1492, museums1789, museums1871, museums1945;
+var museums = L.geoJson(null, {
+  filter : function (feature, latlng) {
+	  return feature.properties.baujahr < 1492;
+  },
+  pointToLayer : pointToLayerDenkmal,
+  onEachFeature : onEachFeatureDenkmal
+});
 $.getJSON("data/located.json", function (data) {
   museums.addData(data);
   map.addLayer(museumLayer);
