@@ -79,8 +79,8 @@ var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.
 var highlight = L.geoJson(null);
 var highlightStyle = {
   stroke: false,
-  fillColor: "#FF0000",
-  fillOpacity: 0.5,
+  fillColor: "#000000",
+  fillOpacity: 0.0,
   radius: 20
 };
 
@@ -124,7 +124,7 @@ function pointToLayerDenkmal(feature, latlng) {
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
-      title: feature.properties.kurzbezeichnung,
+      title: feature.properties.adresse + ", " + feature.properties.kurzbezeichnung + ", Bj. " + feature.properties.baujahr,
       riseOnHover: true
     });
 }
@@ -154,6 +154,7 @@ function onEachFeatureDenkmal(feature, layer) {
       museumSearch.push({
         name: layer.feature.properties.kurzbezeichnung,
         address: layer.feature.properties.adresse,
+        baujahr: layer.feature.properties.baujahr,
         source: "Denkmal",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -167,7 +168,7 @@ var museumLayer = L.geoJson(null);
 var museums1492, museums1789, museums1871, museums1945;
 var museums = L.geoJson(null, {
   filter : function (feature, latlng) {
-	  return feature.properties.baujahr < 1492;
+	  return feature.properties.baujahr < 3000;
   },
   pointToLayer : pointToLayerDenkmal,
   onEachFeature : onEachFeatureDenkmal
@@ -355,7 +356,7 @@ $(document).one("ajaxStop", function () {
     source: museumsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal</h4>",
-      suggestion: Handlebars.compile(["{{address}}<br>&nbsp;<small>{{name}}</small>"].join(""))
+      suggestion: Handlebars.compile(["<small>{{address}}</small></br><small><i>{{name}}&nbsp;(Bj. {{baujahr}})</i></small>"].join(""))
     }
   })
   .on("typeahead:selected", function (obj, datum) {
