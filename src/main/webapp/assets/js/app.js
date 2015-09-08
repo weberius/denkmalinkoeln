@@ -415,7 +415,7 @@ $("#featureModal").on("hidden.bs.modal", function (e) {
 
 
 // Typeahead search functionality 
-$(document).on("ajaxStop", function () {
+$(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
   // Fit map to boroughs bounds
