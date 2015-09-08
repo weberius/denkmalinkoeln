@@ -310,7 +310,7 @@ $(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
   // Fit map to boroughs bounds
-  map.fitBounds(boroughs.getBounds());
+  // map.fitBounds(boroughs.getBounds());
   featureList = new List("features", {valueNames: ["feature-name"]});
   //featureList.sort("feature-name", {order:"asc"});
 
@@ -327,7 +327,7 @@ $(document).one("ajaxStop", function () {
   var museumsBH = new Bloodhound({
     name: "Denkmal",
     datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.adress);
+      return Bloodhound.tokenizers.whitespace(d.address);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     local: museumSearch,
@@ -351,11 +351,11 @@ $(document).one("ajaxStop", function () {
     }
   }, {
     name: "Denkmal",
-    displayKey: "adress",
+    displayKey: "address",
     source: museumsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal</h4>",
-      suggestion: Handlebars.compile(["{{kurzbezeichnung}}<br>&nbsp;<small>{{adress}}</small>"].join(""))
+      suggestion: Handlebars.compile(["{{address}}<br>&nbsp;<small>{{name}}</small>"].join(""))
     }
   })
   .on("typeahead:selected", function (obj, datum) {
