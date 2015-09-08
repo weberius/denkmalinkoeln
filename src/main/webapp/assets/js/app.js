@@ -251,9 +251,9 @@ var locateControl = L.control.locate({
   icon: "fa fa-location-arrow",
   metric: false,
   strings: {
-    title: "My location",
-    popup: "You are within {distance} {unit} from this point",
-    outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+    title: "Hier bin ich.",
+    popup: "Sie befinden sich in einem Radius von {distance} {unit} von diesem Punkt.",
+    outsideMapBoundsMsg: "Offensichtlich sind Sie ausserhalb der Karte."
   },
   locateOptions: {
     maxZoom: 18,
@@ -280,7 +280,7 @@ var groupedOverlays = {
     "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal": museumLayer
   },
   "Reference": {
-    "Stadtteile": boroughs
+	    "<img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Stadtteile": boroughs
   }
 };
 
@@ -347,7 +347,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: boroughsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'>Stadtteile</h4>"
+      header: "<h4 class='typeahead-header'><img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Stadtteile</h4>"
     }
   }, {
     name: "Denkmal",
@@ -366,7 +366,7 @@ $(document).one("ajaxStop", function () {
       if (!map.hasLayer(museumLayer)) {
         map.addLayer(museumLayer);
       }
-      map.setView([datum.lat, datum.lng], 17);
+      map.setView([datum.lat, datum.lng], 18);
       if (map._layers[datum.id]) {
         map._layers[datum.id].fire("click");
       }
