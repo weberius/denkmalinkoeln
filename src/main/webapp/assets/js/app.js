@@ -165,17 +165,48 @@ function onEachFeatureDenkmal(feature, layer) {
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
 var museumLayer = L.geoJson(null);
-var museums1492, museums1789, museums1871, museums1945;
+var denkmal1492Layer = L.geoJson(null);
+var denkmal1871Layer = L.geoJson(null);
+var denkmal1945Layer = L.geoJson(null);
+
+var denkmal1492 = L.geoJson(null, {
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr <= 1492;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
+	});
+var denkmal1871 = L.geoJson(null, {
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr > 1492 && feature.properties.baujahr <= 1871;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
+	});
+
+var denkmal1945 = L.geoJson(null, {
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr > 1871 && feature.properties.baujahr <= 1945;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
+	});
 var museums = L.geoJson(null, {
-  filter : function (feature, latlng) {
-	  return feature.properties.baujahr < 3000;
-  },
-  pointToLayer : pointToLayerDenkmal,
-  onEachFeature : onEachFeatureDenkmal
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr > 1945 && feature.properties.baujahr < 3000;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
 });
 $.getJSON("data/located.json", function (data) {
   museums.addData(data);
+  denkmal1492.addData(data);
+  denkmal1871.addData(data);
+  denkmal1945.addData(data);
   map.addLayer(museumLayer);
+  map.addLayer(denkmal1492Layer);
+  map.addLayer(denkmal1871Layer);
+  map.addLayer(denkmal1945Layer);
 });
 
 map = L.map("map", {
@@ -191,11 +222,29 @@ map.on("overlayadd", function(e) {
   if (e.layer === museumLayer) {
     markerClusters.addLayer(museums);
   }
+  if (e.layer === denkmal1492Layer) {
+	markerClusters.addLayer(denkmal1492);
+  }
+  if (e.layer === denkmal1871Layer) {
+	markerClusters.addLayer(denkmal1871);
+  }
+  if (e.layer === denkmal1945Layer) {
+	markerClusters.addLayer(denkmal1945);
+  }
 });
 
 map.on("overlayremove", function(e) {
   if (e.layer === museumLayer) {
     markerClusters.removeLayer(museums);
+  }
+  if (e.layer === denkmal1492Layer) {
+	markerClusters.removeLayer(denkmal1492);
+  }
+  if (e.layer === denkmal1871Layer) {
+	markerClusters.removeLayer(denkmal1871);
+  }
+  if (e.layer === denkmal1945Layer) {
+	markerClusters.removeLayer(denkmal1945);
   }
 });
 
@@ -278,10 +327,13 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
+    "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal (bis 1492)": denkmal1492Layer,
+    "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal (bis 1871)": denkmal1871Layer,
+    "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal (bis 1945)": denkmal1945Layer,
     "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal": museumLayer
   },
   "Reference": {
-	    "<img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Stadtteile": boroughs
+    "<img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Stadtteile": boroughs
   }
 };
 
