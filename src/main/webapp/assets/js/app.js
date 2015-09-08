@@ -1,4 +1,4 @@
-var map, featureList, boroughSearch = [], theaterSearch = [], museumSearch = [];
+var map, featureList, boroughSearch = [], museumSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -6,7 +6,6 @@ $(window).resize(function() {
 
 $(document).on("click", ".feature-row", function(e) {
   $(document).off("mouseout", ".feature-row", clearHighlight);
-  //sidebarClick(parseInt($(this).attr("id"), 10));
 });
 
 $(document).on("mouseover", ".feature-row", function(e) {
@@ -69,60 +68,6 @@ function clearHighlight() {
   highlight.clearLayers();
 }
 
-function sidebarClick(id) {
-  $("#sidebar").hide();
-  /*
-  var layer = markerClusters.getLayer(id);
-  map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 17);
-  layer.fire("click");
-  */
-  /* Hide sidebar and go to the map on small screens 
-  if (document.body.clientWidth <= 767) {
-    $("#sidebar").hide();
-    map.invalidateSize();
-  }
-  */
-}
-
-function syncSidebar() {
-/*
-  // Empty sidebar features  
- 
-  $("#feature-list tbody").empty();
-  
-  // Loop through theaters layer and add only features which are in the map bounds 
-  theaters.eachLayer(function (layer) {
-    if (map.hasLayer(theaterLayer)) {
-      if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng 
-        		+ '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/wappen.gif"></td><td class="feature-name">' 
-        		+ layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      }
-    }
-  });
-  
-  // Loop through museums layer and add only features which are in the map bounds 
-  museums.eachLayer(function (layer) {
-    if (map.hasLayer(museumLayer)) {
-      if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng 
-        		+ '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/denkmal.png"></td><td class="feature-name">' 
-        		+ layer.feature.properties.adresse + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      }
-    }
-  });
-  
-  // Update list.js featureList 
-  featureList = new List("features", {
-    valueNames: ["feature-name"]
-  });
-  featureList.sort("feature-name", {
-    order: "asc"
-  });
-  
-*/
-}
-
 /* Basemap Layers */
 var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
   maxZoom: 18,
@@ -134,8 +79,8 @@ var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.
 var highlight = L.geoJson(null);
 var highlightStyle = {
   stroke: false,
-  fillColor: "#FF0000",
-  fillOpacity: 0.5,
+  fillColor: "#000000",
+  fillOpacity: 0.0,
   radius: 20
 };
 
@@ -170,48 +115,6 @@ var markerClusters = new L.MarkerClusterGroup({
   disableClusteringAtZoom: 18
 });
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove theaters to markerClusters layer */
-var theaterLayer = L.geoJson(null);
-var theaters = L.geoJson(null, {
-  pointToLayer: function (feature, latlng) {
-    return L.marker(latlng, {
-      icon: L.icon({
-        iconUrl: "assets/img/wappen.gif",
-        iconSize: [24, 28],
-        iconAnchor: [12, 28],
-        popupAnchor: [0, -25]
-      }),
-      title: feature.properties.NAME,
-      riseOnHover: true
-    });
-  }/*,
-  onEachFeature: function (feature, layer) {
-    if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
-      layer.on({
-        click: function (e) {
-          $("#feature-title").html(feature.properties.NAME);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
-          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-        }
-      });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/wappen.gif"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      theaterSearch.push({
-        name: layer.feature.properties.NAME,
-        address: layer.feature.properties.ADDRESS1,
-        source: "Sehenswürdigkeiten",
-        id: L.stamp(layer),
-        lat: layer.feature.geometry.coordinates[1],
-        lng: layer.feature.geometry.coordinates[0]
-      });
-    }
-  }*/
-});
-$.getJSON("data/sights.json", function (data) {
-  theaters.addData(data);
-  //map.addLayer(theaterLayer);
-});
 
 function pointToLayerDenkmal(feature, latlng) {
     return L.marker(latlng, {
@@ -221,7 +124,7 @@ function pointToLayerDenkmal(feature, latlng) {
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
       }),
-      title: feature.properties.kurzbezeichnung,
+      title: feature.properties.adresse + ", " + feature.properties.kurzbezeichnung + ", Bj. " + feature.properties.baujahr,
       riseOnHover: true
     });
 }
@@ -251,6 +154,7 @@ function onEachFeatureDenkmal(feature, layer) {
       museumSearch.push({
         name: layer.feature.properties.kurzbezeichnung,
         address: layer.feature.properties.adresse,
+        baujahr: layer.feature.properties.baujahr,
         source: "Denkmal",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -261,17 +165,48 @@ function onEachFeatureDenkmal(feature, layer) {
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
 var museumLayer = L.geoJson(null);
-var museums1492, museums1789, museums1871, museums1945;
+var denkmal1492Layer = L.geoJson(null);
+var denkmal1871Layer = L.geoJson(null);
+var denkmal1945Layer = L.geoJson(null);
+
+var denkmal1492 = L.geoJson(null, {
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr <= 1492;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
+	});
+var denkmal1871 = L.geoJson(null, {
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr > 1492 && feature.properties.baujahr <= 1871;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
+	});
+
+var denkmal1945 = L.geoJson(null, {
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr > 1871 && feature.properties.baujahr <= 1945;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
+	});
 var museums = L.geoJson(null, {
-  filter : function (feature, latlng) {
-	  return feature.properties.baujahr < 1492;
-  },
-  pointToLayer : pointToLayerDenkmal,
-  onEachFeature : onEachFeatureDenkmal
+	  filter : function (feature, latlng) {
+		  return feature.properties.baujahr > 1945 && feature.properties.baujahr < 3000;
+	  },
+	  pointToLayer : pointToLayerDenkmal,
+	  onEachFeature : onEachFeatureDenkmal
 });
 $.getJSON("data/located.json", function (data) {
   museums.addData(data);
+  denkmal1492.addData(data);
+  denkmal1871.addData(data);
+  denkmal1945.addData(data);
   map.addLayer(museumLayer);
+  map.addLayer(denkmal1492Layer);
+  map.addLayer(denkmal1871Layer);
+  map.addLayer(denkmal1945Layer);
 });
 
 map = L.map("map", {
@@ -284,30 +219,37 @@ map = L.map("map", {
 
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
-  if (e.layer === theaterLayer) {
-    markerClusters.addLayer(theaters);
-    syncSidebar();
-  }
   if (e.layer === museumLayer) {
     markerClusters.addLayer(museums);
-    syncSidebar();
+  }
+  if (e.layer === denkmal1492Layer) {
+	markerClusters.addLayer(denkmal1492);
+  }
+  if (e.layer === denkmal1871Layer) {
+	markerClusters.addLayer(denkmal1871);
+  }
+  if (e.layer === denkmal1945Layer) {
+	markerClusters.addLayer(denkmal1945);
   }
 });
 
 map.on("overlayremove", function(e) {
-  if (e.layer === theaterLayer) {
-    markerClusters.removeLayer(theaters);
-    syncSidebar();
-  }
   if (e.layer === museumLayer) {
     markerClusters.removeLayer(museums);
-    syncSidebar();
+  }
+  if (e.layer === denkmal1492Layer) {
+	markerClusters.removeLayer(denkmal1492);
+  }
+  if (e.layer === denkmal1871Layer) {
+	markerClusters.removeLayer(denkmal1871);
+  }
+  if (e.layer === denkmal1945Layer) {
+	markerClusters.removeLayer(denkmal1945);
   }
 });
 
 /* Filter sidebar feature list to only show features in current map bounds */
 map.on("moveend", function (e) {
-  syncSidebar();
 });
 
 /* Clear feature highlight when map is clicked */
@@ -359,9 +301,9 @@ var locateControl = L.control.locate({
   icon: "fa fa-location-arrow",
   metric: false,
   strings: {
-    title: "My location",
-    popup: "You are within {distance} {unit} from this point",
-    outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+    title: "Hier bin ich.",
+    popup: "Sie befinden sich in einem Radius von {distance} {unit} von diesem Punkt.",
+    outsideMapBoundsMsg: "Offensichtlich sind Sie ausserhalb der Karte."
   },
   locateOptions: {
     maxZoom: 18,
@@ -385,11 +327,13 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Sehenswürdigkeiten": theaterLayer,
+    "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal (bis 1492)": denkmal1492Layer,
+    "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal (bis 1871)": denkmal1871Layer,
+    "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal (bis 1945)": denkmal1945Layer,
     "<img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal": museumLayer
   },
   "Reference": {
-    "Stadtteile": boroughs
+    "<img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Stadtteile": boroughs
   }
 };
 
@@ -419,9 +363,9 @@ $(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
   // Fit map to boroughs bounds
-  map.fitBounds(boroughs.getBounds());
+  // map.fitBounds(boroughs.getBounds());
   featureList = new List("features", {valueNames: ["feature-name"]});
-  featureList.sort("feature-name", {order:"asc"});
+  //featureList.sort("feature-name", {order:"asc"});
 
   var boroughsBH = new Bloodhound({
     name: "Stadtteile",
@@ -433,20 +377,10 @@ $(document).one("ajaxStop", function () {
     limit: 10
   });
 
-  var theatersBH = new Bloodhound({
-    name: "Sehenswürdigkeiten",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: theaterSearch,
-    limit: 10
-  });
-
   var museumsBH = new Bloodhound({
     name: "Denkmal",
     datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
+      return Bloodhound.tokenizers.whitespace(d.address);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     local: museumSearch,
@@ -454,7 +388,6 @@ $(document).one("ajaxStop", function () {
   });
 
   boroughsBH.initialize();
-  theatersBH.initialize();
   museumsBH.initialize();
 
   // instantiate the typeahead UI
@@ -467,43 +400,26 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: boroughsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'>Stadtteile</h4>"
-    }
-  }, {
-    name: "Sehenswürdigkeiten",
-    displayKey: "name",
-    source: theatersBH.ttAdapter(),
-    templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Sehenswürdigkeiten</h4>",
-      suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
+      header: "<h4 class='typeahead-header'><img src='assets/img/wappen.gif' width='24' height='28'>&nbsp;Stadtteile</h4>"
     }
   }, {
     name: "Denkmal",
-    displayKey: "kurzbezeichnung",
+    displayKey: "address",
     source: museumsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/denkmal.png' width='24' height='28'>&nbsp;Denkmal</h4>",
-      suggestion: Handlebars.compile(["{{kurzbezeichnung}}<br>&nbsp;<small>{{adress}}</small>"].join(""))
+      suggestion: Handlebars.compile(["<small>{{address}}</small></br><small><i>{{name}}&nbsp;(Bj. {{baujahr}})</i></small>"].join(""))
     }
   })
   .on("typeahead:selected", function (obj, datum) {
     if (datum.source === "Stadtteile") {
       map.fitBounds(datum.bounds);
     }
-    if (datum.source === "Sehenswürdigkeiten") {
-      if (!map.hasLayer(theaterLayer)) {
-        map.addLayer(theaterLayer);
-      }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
-      }
-    }
     if (datum.source === "Denkmal") {
       if (!map.hasLayer(museumLayer)) {
         map.addLayer(museumLayer);
       }
-      map.setView([datum.lat, datum.lng], 17);
+      map.setView([datum.lat, datum.lng], 18);
       if (map._layers[datum.id]) {
         map._layers[datum.id].fire("click");
       }
