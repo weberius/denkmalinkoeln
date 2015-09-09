@@ -453,12 +453,12 @@ $(document).ready(function() {
     $('#notlocated').DataTable( {
         "ajax": "data/notlocated.json",
         "columns": [
-            { "data": "name" },
-            { "data": "position" },
-            { "data": "office" },
-            { "data": "extn" },
-            { "data": "start_date" },
-            { "data": "salary" }
+            { "data": "denkmalnummer" },
+            { "data": "plz" },
+            { "data": "strasse" },
+            { "data": "nummer" },
+            { "data": "baujahr" },
+            { "data": "kurzbezeichnung" }
         ]
     } );
 } );
