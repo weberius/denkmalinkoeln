@@ -87,11 +87,14 @@ var highlightStyle = {
 var boroughs = L.geoJson(null, {
   style: function (feature) {
     return {
-      color: "grey",
-      fill: false,
+      fillColor: '#000000',
+      fillOpacity: 0.2,
+      color: '#ffffff',
+      dashArray: '3',
+      fill: true,
       opacity: 1,
       clickable: false,
-      weight: 1
+      weight: 3
     };
   },
   onEachFeature: function (feature, layer) {
