@@ -447,3 +447,18 @@ if (!L.Browser.touch) {
 } else {
   L.DomEvent.disableClickPropagation(container);
 }
+
+// datatable
+$(document).ready(function() {
+    $('#notlocated').DataTable( {
+        "ajax": "data/notlocated.json",
+        "columns": [
+            { "data": "name" },
+            { "data": "position" },
+            { "data": "office" },
+            { "data": "extn" },
+            { "data": "start_date" },
+            { "data": "salary" }
+        ]
+    } );
+} );
