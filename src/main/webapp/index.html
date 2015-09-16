@@ -85,12 +85,16 @@
 							class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="data/Denkmalliste.csv" download="data/Denkmalliste.csv"
-								target="_blank" data-toggle="collapse"
-								data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;alle Denkm&auml;ler (csv)</a></li>
-							<li><a href="data/geo/Denkmalliste.csv" download="data/geo/Denkmalliste.csv"
-								target="_blank" data-toggle="collapse"
-								data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Denkm&auml;ler georeferenziert (csv)</a></li>
+							<li><a href="data/Denkmalliste.csv"
+								download="data/Denkmalliste.csv" target="_blank"
+								data-toggle="collapse" data-target=".navbar-collapse.in"><i
+									class="fa fa-download"></i>&nbsp;&nbsp;alle Denkm&auml;ler
+									(csv)</a></li>
+							<li><a href="data/geo/Denkmalliste.csv"
+								download="data/geo/Denkmalliste.csv" target="_blank"
+								data-toggle="collapse" data-target=".navbar-collapse.in"><i
+									class="fa fa-download"></i>&nbsp;&nbsp;Denkm&auml;ler
+									georeferenziert (csv)</a></li>
 							<li><a href="data/nogeo/Denkmalliste.csv"
 								download="data/nogeo/Denkmalliste.csv" target="_blank"
 								data-toggle="collapse" data-target=".navbar-collapse.in"><i
@@ -126,8 +130,8 @@
 				<div class="modal-body">
 					<ul class="nav nav-tabs" id="aboutTabs">
 						<li class="active"><a href="#about" data-toggle="tab"><i
-								class="fa fa-question-circle"></i>&nbsp;About the project</a></li>
-<!-- 
+								class="fa fa-question-circle"></i>&nbsp;&Uuml;ber dieses Projekt</a></li>
+						<!-- 
 						<li><a href="#contact" data-toggle="tab"><i
 								class="fa fa-envelope"></i>&nbsp;Contact us</a></li>
  -->
@@ -145,49 +149,73 @@
 					<div class="tab-content" id="aboutTabsContent">
 						<div class="tab-pane fade active in" id="about">
 							<p>
-								A simple, responsive template for building web mapping
-								applications with <a href="http://getbootstrap.com/">Bootstrap
-									3</a>, <a href="http://leafletjs.com/" target="_blank">Leaflet</a>,
-								and <a href="http://twitter.github.io/typeahead.js/"
-									target="_blank">typeahead.js</a>. Open source, MIT licensed,
-								and available on <a href="https://github.com/bmcbride/bootleaf"
-									target="_blank">GitHub</a>.
+								Dieses Projekt m&ouml;chte die Baudenkm&auml;ler der Stadt
+								K&ouml;ln auf einer Map anzeigen. Diese werden durch das <a
+									href="http://www.offenedaten-koeln.de/" target="_blank">Offene
+									Daten Portal</a> der <a href="http://www.koeln.de" target="_blank">Stadt
+									Köln</a> zur Verfügung gestellt.
+									Zur Geocodierung wurde <a href="http://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a> verwendet.
 							</p>
 							<div class="panel panel-primary">
 								<div class="panel-heading">Features</div>
 								<ul class="list-group">
-									<li class="list-group-item">Fullscreen mobile-friendly map
-										template with responsive navbar and modal placeholders</li>
-									<li class="list-group-item">jQuery loading of external
-										GeoJSON files</li>
-									<li class="list-group-item">Logical multiple layer marker
-										clustering via the <a
-										href="https://github.com/Leaflet/Leaflet.markercluster"
+									<li class="list-group-item">Anzeige der Informationen
+										sowohl im Desktop-Browser, als auch auf Tablet und Smartphone
+										durch Verwendung von <a
+										href="https://github.com/bmcbride/bootleaf" target="_blank">Bootleaf</a>,
+										das wiederum auf <a href="http://getbootstrap.com/"
+										target="_blank">Bootstrap 3</a> und <a
+										href="http://leafletjs.com/" target="_blank">Leaflet</a>
+										aufbaut.
+									</li>
+									<li class="list-group-item">Download aufbereiteter
+										Informationen im csv-Format</li>
+									<li class="list-group-item">Standortbezogener Dienst auf
+										Basis von <a
+										href="https://www.mapbox.com/mapbox.js/example/v1.0.0/leaflet-locatecontrol/"
+										target="_blank">Mapbox Leaflet Locate</a>
+									</li>
+									<li class="list-group-item">Anzeige von nicht geocodierten
+										Daten mit Hilfe von <a href="https://www.datatables.net"
+										target="_blank">DataTables</a>
+									</li>
+									<li class="list-group-item">Marker clustering auf Basis
+										von <a href="https://github.com/Leaflet/Leaflet.markercluster"
 										target="_blank">leaflet marker cluster plugin</a>
 									</li>
-									<li class="list-group-item">Elegant client-side
-										multi-layer feature search with autocomplete using <a
+									<li class="list-group-item">Suche über Denkmal und
+										Stadtteile durch auf Basis von <a
 										href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a>
-									</li>
-									<li class="list-group-item">Responsive sidebar feature
-										list synced with map bounds, which includes sorting and
-										filtering via <a href="http://listjs.com/" target="_blank">list.js</a>
-									</li>
-									<li class="list-group-item">Marker icons included in
-										grouped layer control via the <a
-										href="https://github.com/ismyrnow/Leaflet.groupedlayercontrol"
-										target="_blank">grouped layer control plugin</a>
 									</li>
 								</ul>
 							</div>
 						</div>
 						<div id="disclaimer" class="tab-pane fade text-danger">
-							<p>The data provided on this site is for informational and
-								planning purposes only.</p>
-							<p>Absolutely no accuracy or completeness guarantee is
-								implied or intended. All information on this map is subject to
-								such variations and corrections as might result from a complete
-								title search and/or accurate field survey.</p>
+							<p>
+								<strong>1. Haftungsbeschränkung</strong><br /> Die Inhalte des
+								Internetauftritts wurden mit größtmöglicher Sorgfalt und nach
+								bestem Gewissen erstellt. Dennoch übernimmt der Anbieter dieser
+								Webseite keine Gewähr für die Aktualität, Vollständigkeit und
+								Richtigkeit der bereitgestellten Seiten und Inhalte.
+							</p>
+							<p>
+								<strong>2. Externe Links</strong><br /> Die Webseite enthält
+								sog. „externe Links“ (Verlinkungen) zu anderen Webseiten, auf
+								deren Inhalt der Anbieter der Webseite keinen Einfluss hat. Aus
+								diesem Grund kann der Anbieter für diese Inhalte auch keine
+								Gewähr übernehmen.<br />
+							</p>
+							<p>
+								<strong>3. Datenschutz</strong><br /> Durch den Besuch des
+								Internetauftritts können Informationen (Datum, Uhrzeit,
+								aufgerufene Seite) über den Zugriff auf dem Server gespeichert
+								werden. Es werden keine personenbezogenenen (z. B. Name,
+								Anschrift oder E-Mail-Adresse) Daten, gespeichert.
+							</p>
+							<p>
+								<strong>Quelle</strong>: <a
+									href="http://www.mustervorlage.net/homepage-kostenlos">Disclaimer
+									und Websites erstellen</a>
 						</div>
 						<!-- 
 						<div class="tab-pane fade" id="contact">
@@ -331,15 +359,23 @@
 	<!-- /.modal -->
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
-	<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
-	<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-	<script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+	<script
+		src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+	<script
+		src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+	<script
+		src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 	<script src="assets/js/app.js"></script>
 </body>
 </html>
