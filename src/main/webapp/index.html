@@ -137,44 +137,52 @@
 					<div class="tab-content" id="aboutTabsContent">
 						<div class="tab-pane fade active in" id="about">
 							<p>
-								Dieses Projekt m&ouml;chte die Baudenkm&auml;ler der Stadt
-								K&ouml;ln auf einer Map anzeigen. Diese werden durch das <a
+								Diese Webseite zeigt auf Basis der <a
+									href="http://www.offenedaten-koeln.de/dataset/denkmalliste-stadt-koeln">Denkmalliste
+									Stadt Koeln</a> die Baudenkm&auml;ler der Stadt K&ouml;ln auf der Karte von Köln an. Diese werden durch das <a
 									href="http://www.offenedaten-koeln.de/" target="_blank">Offene
 									Daten Portal</a> der <a href="http://www.koeln.de" target="_blank">Stadt
 									Köln</a> zur Verfügung gestellt.
-									Zur Geocodierung wurde <a href="http://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a> verwendet.
 							</p>
 							<div class="panel panel-primary">
 								<div class="panel-heading">Features</div>
 								<ul class="list-group">
 									<li class="list-group-item">Anzeige der Informationen
 										sowohl im Desktop-Browser, als auch auf Tablet und Smartphone
-										durch Verwendung von <a
+										durch Verwendung von<a
 										href="https://github.com/bmcbride/bootleaf" target="_blank">Bootleaf</a>,
-										das wiederum auf <a href="http://getbootstrap.com/"
-										target="_blank">Bootstrap 3</a> und <a
-										href="http://leafletjs.com/" target="_blank">Leaflet</a>
-										aufbaut.
+										<a href="http://getbootstrap.com/" target="_blank">Bootstrap
+											3</a> und <a href="http://leafletjs.com/" target="_blank">Leaflet</a>.
 									</li>
-									<li class="list-group-item">Download aufbereiteter
-										Informationen im csv-Format</li>
-									<li class="list-group-item">Standortbezogener Dienst auf
-										Basis von <a
+									<li class="list-group-item">Auswahl der Anzeige von
+										Baudenkmälern auf Basis der Angabe des Baujahrs.</li>
+									<li class="list-group-item">Geocodierung auf Basis von <a
+										href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>
+										mit Hilfe von <a
+										href="http://wiki.openstreetmap.org/wiki/Nominatim"
+										target="_blank">Nominatim</a>
+									</li>
+									<li class="list-group-item">GPS basierte Verortung, zur
+										Ermittlung des aktuellen Standortes mit <a
 										href="https://www.mapbox.com/mapbox.js/example/v1.0.0/leaflet-locatecontrol/"
 										target="_blank">Mapbox Leaflet Locate</a>
 									</li>
-									<li class="list-group-item">Anzeige von nicht geocodierten
-										Daten mit Hilfe von <a href="https://www.datatables.net"
-										target="_blank">DataTables</a>
+									<li class="list-group-item">Anzeige von Baudenkmälern, die
+										nicht geocodiert werden konnten im Bereich Tools mit mit Hilfe
+										von <a href="https://www.datatables.net" target="_blank">DataTables</a>
 									</li>
-									<li class="list-group-item">Marker clustering auf Basis
-										von <a href="https://github.com/Leaflet/Leaflet.markercluster"
-										target="_blank">leaflet marker cluster plugin</a>
+									<li class="list-group-item">Marker clustering von
+										Baudenkmälern bei höheren Zoomleveln zur Erhöhung der
+										Anzeigegeschwindigkeit mit <a
+										href="https://github.com/Leaflet/Leaflet.markercluster"
+										target="_blank">Leaflet marker cluster plugin</a>
 									</li>
-									<li class="list-group-item">Suche über Denkmal und
-										Stadtteile durch auf Basis von <a
+									<li class="list-group-item">Laden der Daten in den Browser
+										und Suche über Denkmal und Stadtteile mit <a
 										href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a>
 									</li>
+									<li class="list-group-item">Download aufbereiteter
+										Informationen im csv-Format im Bereich Bereich</li>
 								</ul>
 							</div>
 						</div>
@@ -286,7 +294,8 @@
 					<button class="close" type="button" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">
-						Developed by <a href='http://github.com/weberius/denkmalinkoeln' target='_blank'>Wolfram Eberius</a>
+						Developed by <a href='http://github.com/weberius/denkmalinkoeln'
+							target='_blank'>Wolfram Eberius</a>
 					</h4>
 				</div>
 				<div class="modal-body">
