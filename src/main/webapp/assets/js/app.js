@@ -77,20 +77,17 @@ function clearHighlight() {
 /* Basemap Layers */
 /* Offene Daten Köln */
 var attr = '<h4>Attribution</h4><a href=\'https://github.com/bmcbride/bootleaf\' target=\'_blank\'>Bootleaf</a> by <a href=\'http://bryanmcbride.com\'>bryanmcbride.com</a>, '
-		+ 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">, '
-		+ 'Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA, '
+		+ '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>, '
 		+ '<a href=\'http://www.offenedaten-koeln.de/\' target=\'_blank\'>Offene Daten K&ouml;ln</a>, '
 		+ '<a href=\'http://getbootstrap.com/\' target=\'_blank\'>Bootstrap 3</a>, <a href=\'http://leafletjs.com/\' target=\'_blank\'>Leaflet</a>, '
 		+ '<a href=\'https://www.datatables.net\' target=\'_blank\'>DataTables</a>, '
 		+ '<a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank">leaflet marker cluster plugin</a>, '
 		+ '<a href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a>, '
 		+ 'Geocodierung <a href="http://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>';
-var mapquestOSM = L.tileLayer(
-		"http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-			maxZoom : 18,
-			subdomains : [ "otile1", "otile2", "otile3", "otile4" ],
-			attribution : attr
-		});
+var cartoLight = L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
+	  maxZoom: 18,
+		attribution: attr
+});
 
 /* Overlay Layers */
 var highlight = L.geoJson(null);
@@ -253,7 +250,7 @@ $.getJSON("data/located.json", function(data) {
 map = L.map("map", {
 	zoom : 15,
 	center : [ 50.94135, 6.95819 ],
-	layers : [ mapquestOSM, boroughs, markerClusters, highlight ],
+	layers : [ cartoLight, boroughs, markerClusters, highlight ],
 	zoomControl : false,
 	attributionControl : false
 });
@@ -365,7 +362,7 @@ if (document.body.clientWidth <= 767) {
 }
 
 var baseLayers = {
-	"Street Map" : mapquestOSM
+	"Street Map" : cartoLight
 };
 
 var groupedOverlays = {
